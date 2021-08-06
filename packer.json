@@ -1,0 +1,130 @@
+{
+  "variables": {
+    "ubuntu_base_version": "{{ env `UBUNTU_2004_BASE_VERSION` }}",
+    "ubuntu_base_iso": "{{ env `UBUNTU_2004_BASE_ISO` }}",
+    "ubuntu_base_iso_sha256": "{{ env `UBUNTU_2004_BASE_ISO_SHA256` }}",
+    "ansible_version": "{{ env `ANSIBLE_VERSION` }}",
+    "cryptography_version": "{{ env `CRYPTOGRAPHY_VERSION` }}",
+    "box_version": "{{ env `BOX_VERSION` }}",
+    "box_description": "{{ env `BOX_DESCRIPTION` }}"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<esc><wait>",
+        "<esc><wait>",
+        "<enter><wait>",
+        "/install/vmlinuz",
+        " auto=true",
+        " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        " locale=en_US<wait>",
+        " console-setup/ask_detect=false<wait>",
+        " console-setup/layoutcode=us<wait>",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=en_US<wait>",
+        " fb=false<wait>",
+        " initrd=/install/initrd.gz<wait>",
+        " kbd-chooser/method=us<wait>",
+        " keyboard-configuration/layout=USA<wait>",
+        " keyboard-configuration/variant=USA<wait>",
+        " netcfg/get_domain=vm<wait>",
+        " netcfg/get_hostname=vagrant<wait>",
+        " grub-installer/bootdev=/dev/sda<wait>",
+        " noapic<wait>",
+        " -- <wait>",
+        "<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 81920,
+      "guest_os_type": "Ubuntu_64",
+      "headless": true,
+      "http_directory": "http",
+      "iso_urls": [
+        "iso/{{ user `ubuntu_base_iso` }}",
+        "http://cdimage.ubuntu.com/ubuntu-legacy-server/releases/{{ user `ubuntu_base_version` }}/release/{{ user `ubuntu_base_iso` }}"
+      ],
+      "iso_target_path": "iso/{{ user `ubuntu_base_iso` }}",
+      "iso_checksum": "sha256:{{ user `ubuntu_base_iso_sha256` }}",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "30m",
+      "ssh_handshake_attempts": "5",
+      "shutdown_command": "sudo systemctl poweroff",
+      "guest_additions_path": "/home/vagrant/VBoxGuestAdditions.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "vagrant",
+      "output_directory": "output-virtualbox-iso",
+      "output_filename": "vagrant.ovf",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "8192"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "4"
+        ]
+      ],
+      "export_opts": [
+        "--manifest",
+        "--vsys",
+        "0",
+        "--ovf10",
+        "--options",
+        "nomacs",
+        "--description",
+        "{{user `box_description`}}",
+        "--version",
+        "{{user `box_version`}}"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo python3 -m pip install ansible=={{ user `ansible_version` }}"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/install.yml",
+      "extra_arguments": [
+        "--extra-vars",
+        "box_version={{ user `box_version` }}"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "artifice",
+        "files": [
+          "output-virtualbox-iso/vagrant.ovf"
+        ],
+        "keep_input_artifact": true
+      },
+      {
+        "type": "vagrant",
+        "output": "build/{{user `vagrant_cloud_box_name` }}-{{user `box_version`}}.box",
+        "compression_level": 9
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "{{ user `vagrant_cloud_box_user` }}/{{ user `vagrant_cloud_box_name` }}",
+        "access_token": "{{user `vagrant_cloud_token`}}",
+        "version": "{{user `box_version`}}",
+        "version_description": "{{user `box_version_description`}}",
+        "no_release": true,
+        "keep_input_artifact": true
+      }
+    ]
+  ]
+}
