@@ -6,7 +6,12 @@
     "ansible_version": "{{ env `ANSIBLE_VERSION` }}",
     "cryptography_version": "{{ env `CRYPTOGRAPHY_VERSION` }}",
     "box_version": "{{ env `BOX_VERSION` }}",
-    "box_description": "{{ env `BOX_DESCRIPTION` }}"
+    "box_description": "{{ env `BOX_DESCRIPTION` }}",
+    "vagrant_cloud_user": "{{ env `VAGRANT_CLOUD_USER` }}",
+    "vagrant_cloud_box_user": "{{ env `VAGRANT_CLOUD_BOX_USER` }}",
+    "vagrant_cloud_box_name": "{{ env `VAGRANT_CLOUD_BOX_NAME` }}",
+    "vagrant_cloud_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
+    "box_version_description": "{{ env `BOX_VERSION_DESCRIPTION` }}"
   },
   "builders": [
     {
@@ -55,9 +60,8 @@
       "shutdown_command": "sudo systemctl poweroff",
       "guest_additions_path": "/home/vagrant/VBoxGuestAdditions.iso",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "vagrant",
-      "output_directory": "output-virtualbox-iso",
-      "output_filename": "vagrant.ovf",
+      "vm_name": "ubuntu2004",
+      "output_filename": "vagrant",
       "vboxmanage": [
         [
           "modifyvm",
@@ -71,18 +75,6 @@
           "--cpus",
           "4"
         ]
-      ],
-      "export_opts": [
-        "--manifest",
-        "--vsys",
-        "0",
-        "--ovf10",
-        "--options",
-        "nomacs",
-        "--description",
-        "{{user `box_description`}}",
-        "--version",
-        "{{user `box_version`}}"
       ]
     }
   ],
@@ -104,13 +96,6 @@
   ],
   "post-processors": [
     [
-      {
-        "type": "artifice",
-        "files": [
-          "output-virtualbox-iso/vagrant.ovf"
-        ],
-        "keep_input_artifact": true
-      },
       {
         "type": "vagrant",
         "output": "build/{{user `vagrant_cloud_box_name` }}-{{user `box_version`}}.box",
