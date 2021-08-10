@@ -3,14 +3,14 @@
 set -e
 
 # Set version info
-export BOX_VERSION_BASE=0.8.0
+export BOX_VERSION_BASE="1.0.0"
 export UBUNTU_2004_BASE_VERSION="20.04"
 export UBUNTU_2004_BASE_ISO="ubuntu-20.04.1-legacy-server-amd64.iso"
 export UBUNTU_2004_BASE_ISO_SHA256="f11bda2f2caed8f420802b59f382c25160b114ccc665dbac9c5046e7fceaced2"
 
 # Set versions requested of main components (These will be used in Packer and passed to Ansible downstream)
-export ANSIBLE_VERSION=2.10.7
-export CRYPTOGRAPHY_VERSION=3.3.2
+export ANSIBLE_VERSION="4.3.0"
+export VBOXADD_VERSION="6.1.26"
 
 # Set versions of supported tools, if they don't match, a warning will be shown on screen
 export VIRTUALBOX_VERSION="6.1.26r145957"
@@ -95,7 +95,7 @@ The box defaults to 1 CPU and 1GB of RAM, it is not advised to limit this.
 ## Versions included in this release
 * Latest OS updates installed at build time
 * ansible ${ANSIBLE_VERSION}
-* cryptography ${CRYPTOGRAPHY_VERSION}
+* VirtualBox guest additions ${VBOXADD_VERSION}
 
 ---
 

@@ -4,7 +4,7 @@
     "ubuntu_base_iso": "{{ env `UBUNTU_2004_BASE_ISO` }}",
     "ubuntu_base_iso_sha256": "{{ env `UBUNTU_2004_BASE_ISO_SHA256` }}",
     "ansible_version": "{{ env `ANSIBLE_VERSION` }}",
-    "cryptography_version": "{{ env `CRYPTOGRAPHY_VERSION` }}",
+    "vboxadd_version": "{{ env `VBOXADD_VERSION` }}",
     "box_version": "{{ env `BOX_VERSION` }}",
     "box_description": "{{ env `BOX_DESCRIPTION` }}",
     "vagrant_cloud_user": "{{ env `VAGRANT_CLOUD_USER` }}",
@@ -58,7 +58,7 @@
       "ssh_wait_timeout": "30m",
       "ssh_handshake_attempts": "5",
       "shutdown_command": "sudo systemctl poweroff",
-      "guest_additions_path": "/home/vagrant/VBoxGuestAdditions.iso",
+      "guest_additions_mode": "disable",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "ubuntu2004",
       "output_filename": "vagrant",
@@ -90,7 +90,7 @@
       "playbook_file": "ansible/install.yml",
       "extra_arguments": [
         "--extra-vars",
-        "box_version={{ user `box_version` }}"
+        "\"box_version={{ user `box_version` }} vboxadd_version={{ user `vboxadd_version` }}\""
       ]
     }
   ],
