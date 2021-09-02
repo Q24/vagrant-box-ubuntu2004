@@ -3,6 +3,20 @@
   become_method: sudo
   tasks:
 
+    - name: set swap to off
+      ansible.builtin.shell: swapoff -a
+
+    - name: remove swap mount from fstab
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        state: absent
+        regexp: '^/swap.img.*'
+
+    - name: delete swap file
+      ansible.builtin.file:
+        path: '/swap.img'
+        state: absent
+
     - name: create the .ssh directory for the vagrant user
       ansible.builtin.file:
         path: /home/vagrant/.ssh
