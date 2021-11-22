@@ -1,10 +1,17 @@
 ## Changelog
 
+### 1.1.2-20211122
+* Updated Ansible to version 4.8.0
+* Updated packer dependency to version 1.7.8
+* Updated vagrant dependency to version 2.2.19
+* Updated VirtualBox guest additions to version 6.1.28
+* Updated all Ubuntu packages to date 2021-11-22
+
 ### 1.1.1-20211006
 * Updated Ansible to version 4.6.0
 * Updated packer dependency to version 1.7.6
 * Updated vagrant dependency to version 2.2.18
-* Updated all Ubuntu packages to date 2021-11-06
+* Updated all Ubuntu packages to date 2021-10-06
 * Removed vagrant templates, as this is not needed for a packer virtualbox-iso build
 
 ### 1.1.0-20210902
