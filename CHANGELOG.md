@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.1.3-20220125
+* Updated Ansible to version 5.2.0
+* Updated VirtualBox guest additions to version 6.1.30
+* Updated all Ubuntu packages to date 2022-01-25
+
 ### 1.1.2-20211122
 * Updated Ansible to version 4.8.0
 * Updated packer dependency to version 1.7.8
