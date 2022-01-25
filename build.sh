@@ -3,17 +3,17 @@
 set -e
 
 # Set version info
-export BOX_VERSION_BASE="1.1.2"
+export BOX_VERSION_BASE="1.1.3"
 export UBUNTU_2004_BASE_VERSION="20.04.3"
 export UBUNTU_2004_BASE_ISO="ubuntu-${UBUNTU_2004_BASE_VERSION}-live-server-amd64.iso"
 export UBUNTU_2004_BASE_ISO_SHA256="f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
 
 # Set versions requested of main components (These will be used in Packer and passed to Ansible downstream)
-export ANSIBLE_VERSION="4.8.0"
-export VBOXADD_VERSION="6.1.28"
+export ANSIBLE_VERSION="5.2.0"
+export VBOXADD_VERSION="6.1.30"
 
 # Set versions of supported tools, if they don't match, a warning will be shown on screen
-export VIRTUALBOX_VERSION="6.1.28r147628"
+export VIRTUALBOX_VERSION="6.1.30r148432"
 export PACKER_VERSION="1.7.8"
 export VAGRANT_VERSION="2.2.19"
 
