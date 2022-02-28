@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.1.4-20220228
+* Updated Ubuntu base ISO to version 20.04.4
+* Updated Ansible to version 5.4.0
+* Updated packer dependency to version 1.7.10
+* Updated VirtualBox guest additions to version 6.1.32
+* Updated all Ubuntu packages to date 2022-02-28
+* Zeroed out the file system at the end of the build, to reduce the size of the virtual disk after compression
+
 ### 1.1.3-20220125
 * Updated Ansible to version 5.2.0
 * Updated VirtualBox guest additions to version 6.1.30
