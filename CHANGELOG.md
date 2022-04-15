@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.1.5-20220415
+* Updated Ansible to version 5.6.0
+* Updated packer dependency to version 1.8.0
+* Updated all Ubuntu packages to date 2022-04-15
+* Switched to location-specific Ubuntu mirrorlist for APT
+
 ### 1.1.4-20220228
 * Updated Ubuntu base ISO to version 20.04.4
 * Updated Ansible to version 5.4.0
