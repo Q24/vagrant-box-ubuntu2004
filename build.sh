@@ -3,19 +3,19 @@
 set -e
 
 # Set version info
-export BOX_VERSION_BASE="1.1.7"
-export UBUNTU_2004_BASE_VERSION="20.04.4"
+export BOX_VERSION_BASE="1.2.0"
+export UBUNTU_2004_BASE_VERSION="20.04.5"
 export UBUNTU_2004_BASE_ISO="ubuntu-${UBUNTU_2004_BASE_VERSION}-live-server-amd64.iso"
-export UBUNTU_2004_BASE_ISO_SHA256="28ccdb56450e643bad03bb7bcf7507ce3d8d90e8bf09e38f6bd9ac298a98eaad"
+export UBUNTU_2004_BASE_ISO_SHA256="5035be37a7e9abbdc09f0d257f3e33416c1a0fb322ba860d42d74aa75c3468d4"
 
 # Set versions requested of main components (These will be used in Packer and passed to Ansible downstream)
-export ANSIBLE_VERSION="6.3.0"
-export VBOXADD_VERSION="6.1.36"
+export ANSIBLE_VERSION="6.7.0"
+export VBOXADD_VERSION="7.0.4"
 
 # Set versions of supported tools, if they don't match, a warning will be shown on screen
-export VIRTUALBOX_VERSION="6.1.36r152435"
-export PACKER_VERSION="1.8.3"
-export VAGRANT_VERSION="2.3.0"
+export VIRTUALBOX_VERSION="7.0.4r154605"
+export PACKER_VERSION="1.8.5"
+export VAGRANT_VERSION="2.3.4"
 
 # Set the Vagrant cloud user and box name (make sure you have admin permissions to, or are the owner of this repository)
 export VAGRANT_CLOUD_BOX_USER="ilionx"

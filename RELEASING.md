@@ -38,7 +38,7 @@ Be sure to replace the commit message with the actual box version.
 
 Run `build.sh` to create the actual build.
 
-This will create the base box and updload it to Vagrant, but will not publish it yet. It will incorporate the git commit you have just made in the documentation so the build can be reproduced.
+This will create the base box and upload it to Vagrant, but will not publish it yet. It will incorporate the git commit you have just made in the documentation so the build can be reproduced.
 
 ## Push the code and publish the release
 

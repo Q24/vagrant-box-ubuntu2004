@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.2.0-20221228
+* Updated Ubuntu base ISO to version 20.04.5
+* Updated all Ubuntu packages to date 2022-12-28
+* Updated Ansible to version: 6.7.0
+* Updated build process to support VirtualBox 7
+* Updated VirtualBox guest additions to version: 7.0.4
+* Updated build dependencies: VirtualBox (7.0.4r154605), Packer (1.8.5), Vagrant (2.3.4)
+
 ### 1.1.7-20220825
 * Updated all Ubuntu packages to date 2022-08-25
 * Updated Ansible to version: 6.3.0
